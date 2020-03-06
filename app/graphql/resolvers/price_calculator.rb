@@ -8,8 +8,8 @@ module Resolvers
 
     def resolve(type:, margin:, exchange_rate:)
       @margin = margin
-      @bitcoin_price = Coindesk.bitcoin_price :usd
       @exchange_rate = exchange_rate
+      @bitcoin_price = Coindesk.bitcoin_price :usd
       
       case type
       when "buy"
