@@ -7,18 +7,36 @@ module Resolvers
     argument :exchange_rate, GraphQL::Types::Float, required: true
 
     def resolve(type:, margin:, exchange_rate:)
-      bitcoin_price = Coindesk.bitcoin_price :usd
+      @margin = margin
+      @bitcoin_price = Coindesk.bitcoin_price :usd
+      @exchange_rate = exchange_rate
       
       case type
       when "buy"
+        calculate_buy_price
       when "sell"
+        calculate_sell_price
       end
     end
 
     private
 
+    def calculate_buy_price
+      buy_price = @bitcoin_price + margin_value
+      convert_to_naira buy_price
+    end
+
+    def calculate_sell_price
+      sell_price = @bitcoin_price - margin_value
+      convert_to_naira sell_price
+    end
+
     def margin_value
-      puts context.arguments
+      @margin * @bitcoin_price
+    end
+
+    def convert_to_naira(amount)
+      amount * @exchange_rate
     end
   end
 end
