@@ -9,6 +9,7 @@ gem 'sqlite3'
 gem 'graphql'
 gem 'graphiql-rails'
 gem 'foreman'
+gem 'sprockets-rails'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do

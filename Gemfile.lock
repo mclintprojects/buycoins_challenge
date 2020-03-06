@@ -71,7 +71,7 @@ GEM
     graphiql-rails (1.7.0)
       railties
       sprockets-rails
-    graphql (1.9.14)
+    graphql (1.10.4)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     listen (3.1.5)
@@ -183,6 +183,7 @@ DEPENDENCIES
   rspec-rails
   spring
   spring-watcher-listen (~> 2.0.0)
+  sprockets-rails
   sqlite3
   tzinfo-data
 

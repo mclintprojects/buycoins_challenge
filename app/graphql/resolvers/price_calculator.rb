@@ -1,6 +1,6 @@
 module Resolvers
   class PriceCalculator < GraphQL::Schema::Resolver
-    field :price, GraphQL::Types::Float, null: false
+    type GraphQL::Types::Float, null: false
 
     argument :type, String, required: true
     argument :margin, GraphQL::Types::Float, required: true
@@ -13,6 +13,12 @@ module Resolvers
       when "buy"
       when "sell"
       end
+    end
+
+    private
+
+    def margin_value
+      puts context.arguments
     end
   end
 end
