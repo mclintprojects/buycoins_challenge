@@ -7,7 +7,7 @@ module Resolvers
     argument :exchange_rate, GraphQL::Types::Float, required: true
 
     def resolve(type:, margin:, exchange_rate:)
-      @margin = margin
+      @margin = margin / 100
       @exchange_rate = exchange_rate
       @bitcoin_price = Coindesk.bitcoin_price :usd
       
