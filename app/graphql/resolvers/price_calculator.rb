@@ -1,10 +1,15 @@
 module Resolvers
   class PriceCalculator < GraphQL::Schema::Resolver
-    type GraphQL::Types::Float, null: false
+    class Action < Types::BaseEnum
+      value "BUY"
+      value "SELL"
+    end
 
-    argument :type, String, required: true
-    argument :margin, GraphQL::Types::Float, required: true
-    argument :exchange_rate, GraphQL::Types::Float, required: true
+    type Float, null: false
+
+    argument :type, Action, required: true
+    argument :margin, Float, required: true
+    argument :exchange_rate, Float, required: true
 
     def resolve(type:, margin:, exchange_rate:)
       @margin = margin / 100
@@ -12,9 +17,9 @@ module Resolvers
       @bitcoin_price = Coindesk.bitcoin_price :usd
       
       case type
-      when "buy"
+      when "BUY"
         calculate_buy_price
-      when "sell"
+      when "SELL"
         calculate_sell_price
       end
     end
